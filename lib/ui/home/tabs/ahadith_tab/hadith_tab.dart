@@ -13,7 +13,7 @@ class HadithTab extends StatefulWidget {
 }
 
 class _HadithTabState extends State<HadithTab> {
-List<HadithItem>hadithList=[];
+//List<HadithItem>hadithList=[];
 
   List<String> hadithNames=[];
 
@@ -21,11 +21,11 @@ List<HadithItem>hadithList=[];
 
   @override
   Widget build(BuildContext context) {
-   // var hadithprovider =Provider.of<HadithProvider>(context);
+    var hadithprovider =Provider.of<HadithProvider>(context);
 
-    if(hadithList.isEmpty) loadHadethFile();
+    if(hadithprovider.hadithList.isEmpty) hadithprovider.loadHadethFile();
     return Container(
-      child: hadithList.isEmpty?Center(child: CircularProgressIndicator(),)
+      child: hadithprovider.hadithList.isEmpty?Center(child: CircularProgressIndicator(),)
         :Column(
       children: [
         Expanded(flex: 1,
@@ -52,36 +52,36 @@ List<HadithItem>hadithList=[];
         Expanded(
           flex: 2,
           child: ListView.separated(itemBuilder: (context,index)=>
-              HadithTitleWidget(hadithItem:hadithList[index] ),
+              HadithTitleWidget(hadithItem:hadithprovider.hadithList[index] ),
               separatorBuilder: (context,index)=>Container(
                 width: double.infinity,
                 height: 2,
                   color: Theme.of(context).dividerColor,
               ),
-              itemCount: hadithList.length),
+              itemCount: hadithprovider.hadithList.length),
         )
 ],
     ));
   }
 
-  void loadHadethFile() async{
-    String fileContent = await rootBundle.loadString('assets/files/ahadeth.txt');
-    List<String>allAhadith=  fileContent.trim().split('#');
-
-    for(int i=0;i<allAhadith.length;i++){
-      List<String>hadithLines=allAhadith[i].trim().split('\n');
-       String hadithTitle =hadithLines[0];
-       hadithLines.removeAt(0);
-      String hadithContent= hadithLines.join('\n');
-   HadithItem hadithItem =HadithItem(title: hadithTitle, content: hadithContent);
-   hadithList.add(hadithItem);
-
-    }
-
-    setState(() {
-
-    });
-  }
+  // void loadHadethFile() async{
+  //   String fileContent = await rootBundle.loadString('assets/files/ahadeth.txt');
+  //   List<String>allAhadith=  fileContent.trim().split('#');
+  //
+  //   for(int i=0;i<allAhadith.length;i++){
+  //     List<String>hadithLines=allAhadith[i].trim().split('\n');
+  //      String hadithTitle =hadithLines[0];
+  //      hadithLines.removeAt(0);
+  //     String hadithContent= hadithLines.join('\n');
+  //  HadithItem hadithItem =HadithItem(title: hadithTitle, content: hadithContent);
+  //  hadithList.add(hadithItem);
+  //
+  //   }
+  //
+  //   setState(() {
+  //
+  //   });
+  // }
 }
 
 class HadithItem{

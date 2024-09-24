@@ -11,8 +11,12 @@ import 'ui/home/tabs/ahadith_tab/hadith_details/hadith_details.dart';
 import 'ui/home/tabs/quran_tab/quran_datails/quran_datails.dart';
 
 void main( ) {
-  runApp( ChangeNotifierProvider(
-      create: (context) =>SettingsProvider(),
+  runApp( MultiProvider(providers: [
+      ChangeNotifierProvider(
+      create: (context) =>SettingsProvider(),),
+    ChangeNotifierProvider(
+      create: (context) =>HadithProvider(),)
+  ],
   child:  MyApp()));
 }
 

@@ -7,15 +7,19 @@ import 'package:islami_app/ui/splash/splash_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'providers/quran_providers/quran_providers.dart';
+import 'providers/tasbih_provider/tasbih_provider.dart';
 import 'ui/home/tabs/ahadith_tab/hadith_details/hadith_details.dart';
 import 'ui/home/tabs/quran_tab/quran_datails/quran_datails.dart';
+import 'ui/home/tabs/tasbih_tab/tasbih_tab.dart';
 
 void main( ) {
   runApp( MultiProvider(providers: [
       ChangeNotifierProvider(
       create: (context) =>SettingsProvider(),),
     ChangeNotifierProvider(
-      create: (context) =>HadithProvider(),)
+      create: (context) =>HadithProvider(),),
+    ChangeNotifierProvider(
+      create: (context) =>TasbihProvider(),)
   ],
   child:  MyApp()));
 }
@@ -49,7 +53,9 @@ class MyApp extends StatelessWidget {
         QuranDatailsScreen.routeName:(_)=>ChangeNotifierProvider(
             create:(BuildContext context) =>QuranProvider(),
         child: QuranDatailsScreen()),
-        HadithDetailsSceen.routeName:(_)=> HadithDetailsSceen()
+        HadithDetailsSceen.routeName:(_)=> HadithDetailsSceen(),
+        TasbihTab.routeName:(_)=> TasbihTab(),
+
 
       },
 
